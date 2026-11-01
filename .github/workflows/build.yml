@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unzip project
-        run: unzip -q niko-android.zip
+      - name: Unzip newest project
+        run: |
+          ZIP=$(ls *.zip | sort -V | tail -1)
+          echo "Using $ZIP"
+          unzip -q -o "$ZIP"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
